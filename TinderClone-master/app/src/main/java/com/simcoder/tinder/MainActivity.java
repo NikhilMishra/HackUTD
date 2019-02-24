@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String userSex;
-    private String oppositeUserSex;
     public void checkUserSex(){
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference userDb = usersDb.child(user.getUid());
@@ -137,15 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     if (dataSnapshot.child("sex").getValue() != null){
                         userSex = dataSnapshot.child("sex").getValue().toString();
-                        switch (userSex){
-                            case "Male":
-                                oppositeUserSex = "Female";
-                                break;
-                            case "Female":
-                                oppositeUserSex = "Male";
-                                break;
-                        }
-                        getOppositeSexUsers();
+                        getSameSexUsers();
                     }
                 }
             }
@@ -156,17 +147,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void getOppositeSexUsers(){
+    public void getSameSexUsers(){
         usersDb.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.child("sex").getValue() != null) {
-                    if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yeps").hasChild(currentUId) && dataSnapshot.child("sex").getValue().toString().equals(oppositeUserSex)) {
+                    if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUId) && !dataSnapshot.child("connections").child("yeps").hasChild(currentUId) && dataSnapshot.child("sex").getValue().toString().equals(userSex)) {
                         String profileImageUrl = "default";
                         if (!dataSnapshot.child("profileImageUrl").getValue().equals("default")) {
                             profileImageUrl = dataSnapshot.child("profileImageUrl").getValue().toString();
                         }
-                        cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), profileImageUrl);
+
+                        String newAnswers = dataSnapshot.child("answers").getValue().toString();
+                        String answers = usersDb.child(currentUId).child("answers").toString();
+                        String newPriorities = dataSnapshot.child("priorities").getValue().toString();
+                        String priorities = usersDb.child(currentUId).child("priorities").toString();
+
+                        String matchPercent = match(newAnswers, answers, newPriorities, priorities);
+//                        String matchPercent = dataSnapshot.child("match%").getValue().toString();
+                        cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), matchPercent, profileImageUrl);
                         rowItems.add(item);
                         arrayAdapter.notifyDataSetChanged();
                     }
@@ -186,6 +185,11 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    //TODO: matching algorithm
+    public String match(String newAns, String oldAns, String newPrior, String oldPrior){
+        return "50";  //return match percentage here
     }
 
 

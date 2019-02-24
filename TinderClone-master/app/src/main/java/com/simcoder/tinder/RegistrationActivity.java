@@ -21,6 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
+import java.util.*;
+import java.io.*;
+
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -34,8 +39,23 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        /*mAuth = FirebaseAuth.getInstance();
+        firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user !=null){
+                    Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
+            }
+        };*/
 
         mAuth = FirebaseAuth.getInstance();
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -60,9 +80,75 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mRadioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
+
+        // RATING BARS
+        //all the question ratingbars:
+        final RatingBar ratingBar29 = (RatingBar) findViewById(R.id.ratingBar29);
+        final RatingBar ratingBar4 = (RatingBar) findViewById(R.id.ratingBar4);
+        final RatingBar ratingBar7 = (RatingBar) findViewById(R.id.ratingBar7);
+        final RatingBar ratingBar9 = (RatingBar) findViewById(R.id.ratingBar9);
+        final RatingBar ratingBar11 = (RatingBar) findViewById(R.id.ratingBar11);
+        final RatingBar ratingBar13 = (RatingBar) findViewById(R.id.ratingBar13);
+        final RatingBar ratingBar15 = (RatingBar) findViewById(R.id.ratingBar15);
+        final RatingBar ratingBar17 = (RatingBar) findViewById(R.id.ratingBar17);
+        final RatingBar ratingBar19 = (RatingBar) findViewById(R.id.ratingBar19);
+        final RatingBar ratingBar21 = (RatingBar) findViewById(R.id.ratingBar21);
+        final RatingBar ratingBar23 = (RatingBar) findViewById(R.id.ratingBar23);
+        final RatingBar ratingBar25 = (RatingBar) findViewById(R.id.ratingBar25);
+        final RatingBar ratingBar27 = (RatingBar) findViewById(R.id.ratingBar27);
+
+
+
+        //these are the importance ratingBars
+        final RatingBar ratingBar30 = (RatingBar) findViewById(R.id.ratingBar30);
+        final RatingBar ratingBar6 = (RatingBar) findViewById(R.id.ratingBar6);
+        final RatingBar ratingBar8 = (RatingBar) findViewById(R.id.ratingBar8);
+        final RatingBar ratingBar10 = (RatingBar) findViewById(R.id.ratingBar10);
+        final RatingBar ratingBar12 = (RatingBar) findViewById(R.id.ratingBar12);
+        final RatingBar ratingBar14 = (RatingBar) findViewById(R.id.ratingBar14);
+        final RatingBar ratingBar16 = (RatingBar) findViewById(R.id.ratingBar16);
+        final RatingBar ratingBar18 = (RatingBar) findViewById(R.id.ratingBar18);
+        final RatingBar ratingBar20 = (RatingBar) findViewById(R.id.ratingBar20);
+        final RatingBar ratingBar22 = (RatingBar) findViewById(R.id.ratingBar22);
+        final RatingBar ratingBar24 = (RatingBar) findViewById(R.id.ratingBar24);
+        final RatingBar ratingBar26 = (RatingBar) findViewById(R.id.ratingBar26);
+        final RatingBar ratingBar28 = (RatingBar) findViewById(R.id.ratingBar28);
+
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                String answers = "";
+                String priorities = "";
+
+                answers += Math.round(ratingBar29.getRating());
+                answers += Math.round(ratingBar4.getRating());
+                answers += Math.round(ratingBar7.getRating());
+                answers += Math.round(ratingBar9.getRating());
+                answers += Math.round(ratingBar11.getRating());
+                answers += Math.round(ratingBar13.getRating());
+                answers += Math.round(ratingBar15.getRating());
+                answers += Math.round(ratingBar17.getRating());
+                answers += Math.round(ratingBar19.getRating());
+                answers += Math.round(ratingBar21.getRating());
+                answers += Math.round(ratingBar23.getRating());
+                answers += Math.round(ratingBar25.getRating());
+                answers += Math.round(ratingBar27.getRating());
+
+                priorities += Math.round(ratingBar30.getRating());
+                priorities += Math.round(ratingBar6.getRating());
+                priorities += Math.round(ratingBar8.getRating());
+                priorities += Math.round(ratingBar10.getRating());
+                priorities += Math.round(ratingBar12.getRating());
+                priorities += Math.round(ratingBar14.getRating());
+                priorities += Math.round(ratingBar16.getRating());
+                priorities += Math.round(ratingBar18.getRating());
+                priorities += Math.round(ratingBar20.getRating());
+                priorities += Math.round(ratingBar22.getRating());
+                priorities += Math.round(ratingBar24.getRating());
+                priorities += Math.round(ratingBar26.getRating());
+                priorities += Math.round(ratingBar28.getRating());
+
                 int selectId = mRadioGroup.getCheckedRadioButtonId();
 
                 final RadioButton radioButton = (RadioButton) findViewById(selectId);
@@ -74,6 +160,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 final String email = mEmail.getText().toString();
                 final String password = mPassword.getText().toString();
                 final String name = mName.getText().toString();
+                final String newAnswers = answers;
+                final String newPriorities = priorities;
+
+               // mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
+                //@Override
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -86,6 +177,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             userInfo.put("name", name);
                             userInfo.put("sex", radioButton.getText().toString());
                             userInfo.put("profileImageUrl", "default");
+                            userInfo.put("answers", newAnswers);
+                            userInfo.put("priorities", newPriorities);
                             currentUserDb.updateChildren(userInfo);
                         }
                     }
@@ -93,6 +186,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onStart() {

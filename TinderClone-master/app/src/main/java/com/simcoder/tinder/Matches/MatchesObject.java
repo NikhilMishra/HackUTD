@@ -7,11 +7,15 @@ package com.simcoder.tinder.Matches;
 public class MatchesObject {
     private String userId;
     private String name;
-    private String profileImageUrl;
-    public MatchesObject (String userId, String name, String profileImageUrl){
+    //private String profileImageUrl;
+    public String answers;
+    public String priorities;
+    public MatchesObject (String userId, String name, String ans, String prio){
         this.userId = userId;
         this.name = name;
-        this.profileImageUrl = profileImageUrl;
+        //this.profileImageUrl = profileImageUrl;
+        this.answers = ans;
+        this.priorities = prio;
     }
 
     public String getUserId(){
@@ -28,10 +32,4 @@ public class MatchesObject {
         this.name = name;
     }
 
-    public String getProfileImageUrl(){
-        return profileImageUrl;
-    }
-    public void setProfileImageUrl(String profileImageUrl){
-        this.profileImageUrl = profileImageUrl;
-    }
 }

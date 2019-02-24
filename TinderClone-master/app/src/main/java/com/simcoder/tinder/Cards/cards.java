@@ -7,11 +7,15 @@ package com.simcoder.tinder.Cards;
 public class cards {
     private String userId;
     private String name;
-    private String profileImageUrl;
-    public cards (String userId, String name, String profileImageUrl){
+    public String answers;
+    public String priorities;
+    public int matchPercentage;
+    public cards (String userId, String name, String answers, String priorities, int matchp){
         this.userId = userId;
         this.name = name;
-        this.profileImageUrl = profileImageUrl;
+        this.answers = answers;
+        this.priorities = priorities;
+        this.matchPercentage = matchp;
     }
 
     public String getUserId(){
@@ -28,10 +32,4 @@ public class cards {
         this.name = name;
     }
 
-    public String getProfileImageUrl(){
-        return profileImageUrl;
-    }
-    public void setProfileImageUrl(String profileImageUrl){
-        this.profileImageUrl = profileImageUrl;
-    }
 }

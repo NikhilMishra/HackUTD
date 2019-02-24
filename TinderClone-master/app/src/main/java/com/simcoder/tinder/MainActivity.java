@@ -163,11 +163,14 @@ public class MainActivity extends AppCompatActivity {
                         String newPriorities = dataSnapshot.child("priorities").getValue().toString();
                         String priorities = usersDb.child(currentUId).child("priorities").toString();
 
-                        String matchPercent = match(newAnswers, answers, newPriorities, priorities);
+                        int match = match(newAnswers, answers, newPriorities, priorities);
 //                        String matchPercent = dataSnapshot.child("match%").getValue().toString();
-                        cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), matchPercent, profileImageUrl);
-                        rowItems.add(item);
-                        arrayAdapter.notifyDataSetChanged();
+                        if(match > 900) {
+                            double matchPercent = (match/27);
+                            cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), matchPercent, profileImageUrl);
+                            rowItems.add(item);
+                            arrayAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
             }
@@ -188,8 +191,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //TODO: matching algorithm
-    public String match(String newAns, String oldAns, String newPrior, String oldPrior){
-        return "50";  //return match percentage here
+    public int match(String newAns, String oldAns, String newPrior, String oldPrior){
+
+        int score = 0;
+        for(int i=0; i<newAns.length(); i++) {
+            int p1ans = (int) (oldAns.charAt(i));
+            int p2ans = (int) (newAns.charAt(i));
+            int p1prior = (int) (oldPrior.charAt(i));
+            int p2prior = (int) (newPrior.charAt(i));
+            score += Math.pow(p1ans - p2ans, 2) * p1prior * p2prior;
+        }
+        return score;  //return match percentage here
     }
 
 

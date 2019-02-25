@@ -9,10 +9,10 @@ public class cards {
     private String name;
 //    public String answers;
 //    public String priorities;
-    public double matchPercentage;
+    public int matchPercentage;
     private String profilePic;
 
-    public cards (String userId, String name, double matchp, String profpic){
+    public cards (String userId, String name, int matchp, String profpic){
         this.userId = userId;
         this.name = name;
 //        this.answers = answers;
@@ -48,11 +48,4 @@ public class cards {
 //    public void setPriorities(String prior){
 //        this.priorities = prior;
 //    }
-
-    public double getMatchPercentage(){
-        return matchPercentage;
-    }
-    public void setMatchPercentage(double match){
-        this.matchPercentage = match;
-    }
 }

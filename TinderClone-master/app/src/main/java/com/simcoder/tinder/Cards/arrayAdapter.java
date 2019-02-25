@@ -32,9 +32,11 @@ public class arrayAdapter extends ArrayAdapter<cards>{
         }
 
         TextView name = (TextView) convertView.findViewById(R.id.name);
+        TextView matchPercentage = (TextView) convertView.findViewById(R.id.name);
         ImageView image = (ImageView) convertView.findViewById(R.id.image);
 
-        name.setText(card_item.getName());
+        name.setText(card_item.getName() + "\t\t" + card_item.matchPercentage + "%");
+        //matchPercentage.setText("" + card_item.getMatchPercentage() + "%");
         switch(card_item.getProfileImageUrl()){
             case "default":
                 Glide.with(convertView.getContext()).load(R.mipmap.ic_launcher).into(image);

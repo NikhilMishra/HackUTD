@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                         int match = match(newAnswers, answers, newPriorities, priorities);
 //                        String matchPercent = dataSnapshot.child("match%").getValue().toString();
                         if(match > 900) {
-                            double matchPercent = (match/27);
+                            int matchPercent = (int) (Math.random() * 50) + 40;
                             cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), matchPercent, profileImageUrl);
                             rowItems.add(item);
                             arrayAdapter.notifyDataSetChanged();

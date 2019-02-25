@@ -27,8 +27,9 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="310dp"
+        android:layout_width="wrap_content"
+        android:layout_height="226dp"
+        android:gravity="center"
         app:srcCompat="@drawable/roommatch" />
 
     <EditText

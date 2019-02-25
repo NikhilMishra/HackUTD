@@ -133,12 +133,6 @@
                     android:orientation="vertical" />
             </ScrollView>-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            android:id="@+id/register"/>
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
@@ -212,7 +206,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How neat do you want your apartment?"
+            android:text="How neat do you want your apartment? 1: messy 5: neat freak"
             android:textSize="18dp" />
 
         <RatingBar
@@ -240,7 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="What noise level do you prefer in your room?"
+            android:text="What noise level do you prefer in your room? 1: silence 5: loud music"
             android:textSize="18dp" />
 
         <RatingBar
@@ -269,7 +263,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How often would you like guests in the suite during the day?"
+            android:text="How often would you like guests in the suite during the day? 1:never 5:everyday"
             android:textSize="18dp" />
 
         <RatingBar
@@ -298,7 +292,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How often would you like overnight guests in the suite?"
+            android:text="How often would you like overnight guests in the suite? 1:never 5:everyday"
             android:textSize="18dp" />
 
         <RatingBar
@@ -327,7 +321,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How much would you prefer to live with someone who shares your major?"
+            android:text="How involved do you plan to be on campus? 1:not involved 5:very involved"
             android:textSize="18dp" />
 
         <RatingBar
@@ -356,7 +350,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How comfortable are you with pets in the apartment?"
+            android:text="How comfortable are you with pets in the apartment? 1:im allergic 5:i love pets"
             android:textSize="18dp" />
 
         <RatingBar
@@ -385,7 +379,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How often do you plan on studying in your suite?"
+            android:text="How often do you plan on studying in your suite? 1:never 5:always"
             android:textSize="18dp" />
 
         <RatingBar
@@ -414,7 +408,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="What do you expect of a roommate relationship?"
+            android:text="What do you expect of a roommate relationship? 1:aquaintances 5:best friends"
             android:textSize="18dp" />
 
         <RatingBar
@@ -443,7 +437,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="How often do you anticipate staying on-campus for the weekend?"
+            android:text="How often do you anticipate staying on-campus for the weekend? 1:never 5:"
             android:textSize="18dp" />
 
         <RatingBar
@@ -472,7 +466,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="What is the preferred temperature of your room?"
+            android:text="What is the preferred temperature of your room? 1:60 5:80"
             android:textSize="18dp" />
 
         <RatingBar
@@ -501,7 +495,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="What are your meal habits?"
+            android:text="What are your meal habits? 1:cook every night 5:eat out always"
             android:textSize="18dp" />
 
         <RatingBar
@@ -524,6 +518,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:numStars="3" />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:id="@+id/register"/>
 
     </LinearLayout>
     <!--</TableLayout>-->
